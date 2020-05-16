@@ -5,5 +5,5 @@ script:
   - cd backend
   - npm test
   - cd -
-  - cd frontend/src
+  - cd frontend
   - npm test
