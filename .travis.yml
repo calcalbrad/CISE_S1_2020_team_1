@@ -4,3 +4,4 @@ node_js:
 script:
   - ./frontend/npm test
   - ./backend/npm test
+  - npm test
