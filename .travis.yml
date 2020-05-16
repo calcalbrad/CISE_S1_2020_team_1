@@ -3,4 +3,5 @@ node_js:
   - "stable"
 scripts:
   - make backend 
+  - npm init
   - npm test
