@@ -4,5 +4,5 @@ node_js:
 script:
   - cd ./backend
   - npm test
-  - cd ./frontend
+  - cd CISE_S1_2020_team_1/frontend
   - npm test
