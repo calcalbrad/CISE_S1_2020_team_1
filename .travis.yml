@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - "stable"
 script:
-  - cd ./backend
+  - cd backend
   - npm test
-  - cd CISE_S1_2020_team_1/frontend
+  - cd -
+  - cd frontend/src
   - npm test
