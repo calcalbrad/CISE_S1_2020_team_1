@@ -2,5 +2,5 @@ language: node_js
 node_js:
   - "stable"
 script:
-  - make backend 
-  - npm test
+  - ./frontend/npm test
+  - ./backend/npm test
