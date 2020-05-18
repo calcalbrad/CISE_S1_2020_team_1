@@ -36,5 +36,5 @@ MessageSchema.post('deleteOne', function(doc, next) {
 });
 
 
-let MessageModel = mongoose.model('messages', MessageSchema);
+let MessageModel = mongoose.model('articles', MessageSchema);
 export default MessageModel;

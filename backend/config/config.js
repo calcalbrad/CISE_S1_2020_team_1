@@ -1,6 +1,6 @@
 var config = {
  port: 3001,
- db: "mongodb+srv://dbUser:dbUserPassword@cluster0-usdwk.mongodb.net/test?retryWrites=true&w=majority"
+ db: "mongodb+srv://dbUser:dbUserPassword@cluster0-usdwk.mongodb.net/SEER?retryWrites=true&w=majority"
 
 }
 module.exports = config;
