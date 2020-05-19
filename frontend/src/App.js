@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import MessageList from './components/messageList.js'
 import MessageForm from './components/messageForm.js'
 import ErrorHandler from './components/errorHandler.js'
+import SubmitArticleForm from './components/submitArticleForm'
 import axios from 'axios';
+
 const PORT = 'http://localhost:3001';
 
 class MessageApp extends Component {
@@ -40,7 +42,7 @@ class MessageApp extends Component {
   }
 
   submitMessage = (data) => {
-    axios.post(`${PORT}/message`, {
+    axios.post(`${PORT}/submit`, {
       content: data
     })
     .then(()=>{
@@ -75,6 +77,20 @@ class MessageApp extends Component {
     })
   }
 
+  /* added by luke */
+  submitArticle = (data) => {
+    console.log(data);
+    axios.post(`${PORT}/submit`, {
+      article: data
+    })
+    .then(()=>{
+      this.getAllMessages()
+    })
+    .catch((err)=>{
+      this.setError(err)
+    })
+  }
+
   render(){
     return (
       <div>
@@ -89,6 +105,9 @@ class MessageApp extends Component {
       messages={this.state.messages}
       handleDelete={this.deleteMessage}
       sendUpdate={this.sendUpdate}
+      />
+      <SubmitArticleForm 
+        submitMessage={this.submitArticle}
       />
       </div>
     );

@@ -19,12 +19,12 @@ class MessageList extends Component {
     this.setState({
       editMode: {
         id: message._id,
-        content: message.content
+        content: message.title
       }
     })
   }
   formatMessage(message){
-    let content = message.content
+    let content = message.title
     let updateButton = <button
     onClick={()=>this.toggleUpdate(message)}
     id='update'>

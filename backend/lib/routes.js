@@ -8,10 +8,12 @@ router.get('/', async (req, res) => {
   .catch((err) => res.status(404).json(err))
 })
 
-router.post('/message', async (req, res) => {
-  await messageApp.post(req.body.content)
-  .then((messages) => res.json(messages))
-  .catch((err) => res.status(404).json(err))
+router.post('/submit', async (req, res) => {
+  console.log("hello");
+  await messageApp.post(req.body.article)
+  .then((articles) => res.json(articles))
+  .catch((err) => console.log(err))
+  console.log(req.body.article)
 })
 
 router.delete('/delete/:id', async (req, res) => {
