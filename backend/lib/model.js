@@ -4,7 +4,8 @@ let ArticleSchema = mongoose.Schema({
   author: String,
   pageRange: String,
   topic: String,
-  DOI: String
+  DOI: String,
+  year: Number
 });
 
 // MessageSchema.post('validate', function(doc, next) {
@@ -37,11 +38,6 @@ let ArticleSchema = mongoose.Schema({
 //   };
 //   next()
 // });
-
-
-
-
-
 
 let ArticleModel = mongoose.model('articles', ArticleSchema);
 export default ArticleModel;

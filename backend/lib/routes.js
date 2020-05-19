@@ -1,4 +1,5 @@
 import {Router} from "express"
+import ArticleModel from "./model.js"
 const messageApp = require('./controller.js')
 const router = Router()
 
@@ -8,12 +9,12 @@ router.get('/', async (req, res) => {
   .catch((err) => res.status(404).json(err))
 })
 
+/* submit article */
 router.post('/submit', async (req, res) => {
-  console.log("hello");
   await messageApp.post(req.body.article)
   .then((articles) => res.json(articles))
   .catch((err) => console.log(err))
-  console.log(req.body.article)
+  console.log(req.body.article.year)
 })
 
 router.delete('/delete/:id', async (req, res) => {
