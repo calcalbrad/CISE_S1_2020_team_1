@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.App-li {
+  list-style: none;
+}
+
+.dropdown-toggle,
+.dropdown-menu {
+  width: 100%;
+}
