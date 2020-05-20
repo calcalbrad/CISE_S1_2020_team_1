@@ -8,7 +8,7 @@ class SubmitArticleForm extends React.Component {
     pageRange: '',
     topic: '',
     DOI: '',
-    year: 0,
+    year: 2020,
     }
   }
 
@@ -24,10 +24,26 @@ class SubmitArticleForm extends React.Component {
   }
 
   processSubmit(e){
-     e.preventDefault()
+    if (this.state.title.length > 500) {
+      alert("Error! The length of the title exceeds the maximum value (500 characters).")
+      e.preventDefault()
+      return false;
+    } else if (this.state.author.length > 500) {
+      alert("Error! The length of the author exceeds the maximum value (500 characters).")
+      e.preventDefault()
+      return false;
+    } else {
+      e.preventDefault()
       this.props.submitMessage(this.state)
-      this.onChange();
+      this.onChange()
+      this.setState({title: ''})
+      this.setState({author: ''})
+      this.setState({pageRange: ''})
+      this.setState({topic: ''})
+      this.setState({DOI: ''})
+      this.setState({year: 2020});
     }
+  }
 
 render(){
     return (
@@ -40,7 +56,8 @@ render(){
            onChange={(e)=>this.onChange(e)}
            value={this.state.title}
            name='title'
-           id='title'>
+           id='title'
+           required>
           </textarea>
           <br/>
           <label htmlFor="author">Article author:</label> 
@@ -48,7 +65,8 @@ render(){
            onChange={(e)=>this.onChange(e)}
            value={this.state.author}
            name='author'
-           id='author'>
+           id='author'
+           required>
           </textarea>
           <br/>
           <label htmlFor="pageRange">Page range:</label> 
