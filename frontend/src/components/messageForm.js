@@ -28,7 +28,7 @@ render(){
           <textarea
            onChange={(e)=>this.changeMessageValue(e.target.value)}
            value={this.state.currentMessage}
-           id='message_box' required="true">
+           id='message_box' required={true}>
           </textarea>
           <br/>
           <button

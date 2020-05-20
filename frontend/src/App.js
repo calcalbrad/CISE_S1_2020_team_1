@@ -11,9 +11,30 @@ class MessageApp extends Component {
   constructor(){
     super()
     this.state = {
-      messages: []
+      articles: []
     }
   }
+
+  /* added by Luke */
+  orderByYearDesc(){
+    const sorted = [...this.state.articles].sort((a,b) => {
+      if (a.year > b.year) return -1;
+      if (a.year < b.year) return 1;
+      return 0;
+    });
+    this.setArticles(sorted);
+  }
+
+  /* added by Luke */
+  orderByYearAsc(){
+    const sorted = [...this.state.articles].sort((a,b) => {
+      if (a.year < b.year) return -1;
+      if (a.year > b.year) return 1;
+      return 0;
+    });
+    this.setArticles(sorted);
+  }
+
 
   setError(error){
     this.setState({
@@ -21,9 +42,9 @@ class MessageApp extends Component {
     })
   }
 
-  setMessages(messages){
+  setArticles(articles){
     this.setState({
-      messages: messages
+      articles: articles
     })
   }
 
@@ -34,7 +55,7 @@ class MessageApp extends Component {
   getAllMessages=()=>{
     axios.get(`${PORT}/`)
     .then((result)=>{
-      this.setMessages(result.data)
+      this.setArticles(result.data)
     })
     .catch((err)=>{
       this.setError(err)
@@ -46,7 +67,7 @@ class MessageApp extends Component {
       keyword: keyword
     })
     .then((result)=>{
-      this.setMessages(result.data)
+      this.setArticles(result.data)
     })
     .catch((err)=>{
       this.setError(err)
@@ -113,8 +134,10 @@ class MessageApp extends Component {
       ref='messageFormRef'
       searchMessage={this.searchMessage}
       />
+      <button onClick={() =>{this.orderByYearDesc();}}> Order from newest to oldest </button>
+      <button onClick={() =>{this.orderByYearAsc();}}> Order from oldest to newest </button>
       <MessageList
-      messages={this.state.messages}
+      messages={this.state.articles}
       handleDelete={this.deleteMessage}
       sendUpdate={this.sendUpdate}
       clearSearch={this.getAllMessages}
@@ -122,6 +145,7 @@ class MessageApp extends Component {
       <SubmitArticleForm 
         submitMessage={this.submitArticle}
       />
+      
       </div>
     );
   }
