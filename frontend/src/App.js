@@ -17,21 +17,13 @@ class MessageApp extends Component {
 
   /* added by Luke */
   orderByYearDesc(){
-    const sorted = [...this.state.articles].sort((a,b) => {
-      if (a.year > b.year) return -1;
-      if (a.year < b.year) return 1;
-      return 0;
-    });
+    const sorted = [...this.state.articles].filter(article => typeof article.year != 'undefined').sort((a,b) => b.year - a.year);
     this.setArticles(sorted);
   }
 
   /* added by Luke */
   orderByYearAsc(){
-    const sorted = [...this.state.articles].sort((a,b) => {
-      if (a.year < b.year) return -1;
-      if (a.year > b.year) return 1;
-      return 0;
-    });
+    const sorted = [...this.state.articles].filter(article => typeof article.year != 'undefined').sort((a,b) => a.year - b.year);
     this.setArticles(sorted);
   }
 
