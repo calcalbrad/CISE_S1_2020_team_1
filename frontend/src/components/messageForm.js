@@ -1,4 +1,8 @@
 import React from 'react';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+
 class MessageForm extends React.Component {
   constructor(){
     super()
@@ -21,23 +25,10 @@ class MessageForm extends React.Component {
 
 render(){
     return (
-        <form
-          ref='formRef'
-          onSubmit={(e)=>this.processSubmit(e)}
-          >
-          <textarea
-           onChange={(e)=>this.changeMessageValue(e.target.value)}
-           value={this.state.currentMessage}
-           id='message_box' required={true}>
-          </textarea>
-          <br/>
-          <button
-            type="submit"
-            name="Submit"
-            id="submit">
-            Submit
-          </button>
-        </form>
+      <Form ref='formRef' onSubmit={(e)=>this.processSubmit(e)} inline>
+      <FormControl onChange={(e)=>this.changeMessageValue(e.target.value)} value={this.state.currentMessage} id='message_box' required={true} type="text" placeholder="Search" className=" mr-sm-2" />
+      <Button type="submit">Submit</Button>
+      </Form>
     );
   }
 }

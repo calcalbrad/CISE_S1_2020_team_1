@@ -4,6 +4,13 @@ import MessageForm from './components/messageForm.js'
 import ErrorHandler from './components/errorHandler.js'
 import SubmitArticleForm from './components/submitArticleForm'
 import axios from 'axios';
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PORT = 'http://localhost:3001';
 
@@ -118,28 +125,46 @@ class MessageApp extends Component {
 
   render(){
     return (
-      <div>
+      <React.Fragment>
+        <Navbar className="justify-content-between" bg="dark" variant="dark">
+          <Navbar.Brand>SEER Search</Navbar.Brand>
+          <MessageForm
+          ref='messageFormRef'
+          searchMessage={this.searchMessage}
+          />
+        </Navbar>
       <ErrorHandler
       error={this.state.error}
       />
-      <MessageForm
-      ref='messageFormRef'
-      searchMessage={this.searchMessage}
-      />
-      <button onClick={() =>{this.orderByYearDesc();}}> Order from newest to oldest </button>
-      <button onClick={() =>{this.orderByYearAsc();}}> Order from oldest to newest </button>
-      <MessageList
-      messages={this.state.articles}
-      handleDelete={this.deleteMessage}
-      sendUpdate={this.sendUpdate}
-      clearSearch={this.getAllMessages}
-      />
+      <Container>
+      <Row>
+        <Col sm={10}>
+          <MessageList
+          messages={this.state.articles}
+          handleDelete={this.deleteMessage}
+          sendUpdate={this.sendUpdate}
+          clearSearch={this.getAllMessages}
+          />
+        </Col>
+        <Col sm={2}>
+        <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
+          <Dropdown.Item onClick={() =>{this.orderByYearDesc();}}>Sort by Newest</Dropdown.Item>
+          <Dropdown.Item onClick={() =>{this.orderByYearAsc();}}>Sort by Oldest</Dropdown.Item>
+        </DropdownButton>
+        </Col>
+      </Row>
+      </Container>
       <SubmitArticleForm 
         submitMessage={this.submitArticle}
       />
-      
-      </div>
+      </React.Fragment>
     );
   }
 }
+
+const divStyle = {
+  marginTop: '20px',
+};
+
+
 export default MessageApp;

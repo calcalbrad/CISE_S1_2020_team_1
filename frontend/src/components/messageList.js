@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Card  from 'react-bootstrap/Card';
+import ListGroup  from 'react-bootstrap/ListGroup';
+
 class MessageList extends Component {
   constructor(){
     super()
@@ -27,16 +30,17 @@ class MessageList extends Component {
       return <li
       className='message'
       key={message._id}>
-      title: {message.title}
-      <br/>
-      author(s): {message.author}
-      <br/>
-      page range: {message.pageRange}
-      <br />
-      topic: {message.topic}
-      <br />
-      year: {message.year}<br /><br />
+      <Card style={divStyle}>
+      <Card.Header>{message.title}</Card.Header>
+      <ListGroup variant="flush">
+        <ListGroup.Item>Author(s): {message.author}</ListGroup.Item>
+        <ListGroup.Item>Pages: {message.pageRange}</ListGroup.Item>
+        <ListGroup.Item>Topic: {message.topic}</ListGroup.Item>
+        <ListGroup.Item>Year: {message.year}</ListGroup.Item>
+      </ListGroup>
+    </Card>
       </li>
+      
     }
     render(){
       if (!this.props.messages){
@@ -56,4 +60,9 @@ class MessageList extends Component {
       }
     }
   };
+
+  const divStyle = {
+    marginTop: '20px',
+  };
+
   export default MessageList
