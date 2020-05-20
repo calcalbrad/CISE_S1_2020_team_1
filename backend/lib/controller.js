@@ -15,6 +15,10 @@ function deleteMessage(id){
   return ArticleModel.deleteOne({_id: id})
 }
 
+function getSearch(topic){
+  return ArticleModel.find({topic: topic})
+}
+
 function getSingleMessage(id){
   return ArticleModel.findOne({_id: id})
 }
@@ -28,5 +32,6 @@ module.exports = {
   getSingleMessage,
   post,
   deleteMessage,
-  updateMessage
+  updateMessage,
+  getSearch
 }
