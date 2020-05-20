@@ -117,6 +117,7 @@ class MessageApp extends Component {
       messages={this.state.messages}
       handleDelete={this.deleteMessage}
       sendUpdate={this.sendUpdate}
+      clearSearch={this.getAllMessages}
       />
       <SubmitArticleForm 
         submitMessage={this.submitArticle}
