@@ -2,16 +2,39 @@ import React, { Component } from 'react';
 import MessageList from './components/messageList.js'
 import MessageForm from './components/messageForm.js'
 import ErrorHandler from './components/errorHandler.js'
+import SubmitArticleForm from './components/submitArticleForm'
 import axios from 'axios';
+
 const PORT = 'http://localhost:3001';
 
 class MessageApp extends Component {
   constructor(){
     super()
     this.state = {
-      messages: []
+      articles: []
     }
   }
+
+  /* added by Luke */
+  orderByYearDesc(){
+    const sorted = [...this.state.articles].sort((a,b) => {
+      if (a.year > b.year) return -1;
+      if (a.year < b.year) return 1;
+      return 0;
+    });
+    this.setArticles(sorted);
+  }
+
+  /* added by Luke */
+  orderByYearAsc(){
+    const sorted = [...this.state.articles].sort((a,b) => {
+      if (a.year < b.year) return -1;
+      if (a.year > b.year) return 1;
+      return 0;
+    });
+    this.setArticles(sorted);
+  }
+
 
   setError(error){
     this.setState({
@@ -19,9 +42,9 @@ class MessageApp extends Component {
     })
   }
 
-  setMessages(messages){
+  setArticles(articles){
     this.setState({
-      messages: messages
+      articles: articles
     })
   }
 
@@ -32,7 +55,19 @@ class MessageApp extends Component {
   getAllMessages=()=>{
     axios.get(`${PORT}/`)
     .then((result)=>{
-      this.setMessages(result.data)
+      this.setArticles(result.data)
+    })
+    .catch((err)=>{
+      this.setError(err)
+    })
+  }
+
+  searchMessage = (keyword) => {
+    axios.get(`${PORT}/search/${keyword}`, {
+      keyword: keyword
+    })
+    .then((result)=>{
+      this.setArticles(result.data)
     })
     .catch((err)=>{
       this.setError(err)
@@ -40,7 +75,7 @@ class MessageApp extends Component {
   }
 
   submitMessage = (data) => {
-    axios.post(`${PORT}/message`, {
+    axios.post(`${PORT}/submit`, {
       content: data
     })
     .then(()=>{
@@ -75,6 +110,20 @@ class MessageApp extends Component {
     })
   }
 
+  /* added by luke */
+  submitArticle = (data) => {
+    console.log(data);
+    axios.post(`${PORT}/submit`, {
+      article: data
+    })
+    .then(()=>{
+      this.getAllMessages()
+    })
+    .catch((err)=>{
+      this.setError(err)
+    })
+  }
+
   render(){
     return (
       <div>
@@ -83,13 +132,20 @@ class MessageApp extends Component {
       />
       <MessageForm
       ref='messageFormRef'
-      submitMessage={this.submitMessage}
+      searchMessage={this.searchMessage}
       />
+      <button onClick={() =>{this.orderByYearDesc();}}> Order from newest to oldest </button>
+      <button onClick={() =>{this.orderByYearAsc();}}> Order from oldest to newest </button>
       <MessageList
-      messages={this.state.messages}
+      messages={this.state.articles}
       handleDelete={this.deleteMessage}
       sendUpdate={this.sendUpdate}
+      clearSearch={this.getAllMessages}
       />
+      <SubmitArticleForm 
+        submitMessage={this.submitArticle}
+      />
+      
       </div>
     );
   }

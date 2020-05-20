@@ -15,7 +15,7 @@ class MessageForm extends React.Component {
 
   processSubmit(e){
      e.preventDefault()
-      this.props.submitMessage(this.state.currentMessage)
+      this.props.searchMessage(this.state.currentMessage)
       this.changeMessageValue('')
     }
 
@@ -28,7 +28,7 @@ render(){
           <textarea
            onChange={(e)=>this.changeMessageValue(e.target.value)}
            value={this.state.currentMessage}
-           id='message_box'>
+           id='message_box' required={true}>
           </textarea>
           <br/>
           <button

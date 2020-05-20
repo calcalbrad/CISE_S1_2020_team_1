@@ -19,48 +19,23 @@ class MessageList extends Component {
     this.setState({
       editMode: {
         id: message._id,
-        content: message.content
+        content: message.title
       }
     })
   }
   formatMessage(message){
-    let content = message.content
-    let updateButton = <button
-    onClick={()=>this.toggleUpdate(message)}
-    id='update'>
-    update
-    </button>
-    if (message._id === this.state.editMode.id){
-      content = (<textarea
-        onChange={(e) => this.setState({editMode: {
-          id: message._id,
-          content: e.target.value
-        }}
-      )}
-      value={this.state.editMode.content}
-      ref='updateBox'
-      id='updateBox'
-      >
-      </textarea>)
-      updateButton = (<button
-        onClick={()=>this.sendUpdate(message)}
-        id='send'>
-        Send Update
-        </button>)
-      }
       return <li
       className='message'
       key={message._id}>
-      {content}
+      title: {message.title}
       <br/>
-      {message.date}
+      author(s): {message.author}
       <br/>
-      <button
-      id='delete'
-      onClick={()=>this.props.handleDelete(message._id)}>
-      delete
-      </button>
-      {updateButton}
+      page range: {message.pageRange}
+      <br />
+      topic: {message.topic}
+      <br />
+      year: {message.year}<br /><br />
       </li>
     }
     render(){
@@ -74,7 +49,10 @@ class MessageList extends Component {
           return this.formatMessage(message)
         })}
         </ul>
-        </div>
+        <button onClick={() =>{
+            this.props.clearSearch();
+        }}>Clear Search</button>
+        </div> 
       }
     }
   };

@@ -1,31 +1,43 @@
 //controller.js
-import MessageModel from './model'
+import ArticleModel from './model'
 
 function getAll(){
-  return MessageModel.find()
+  return ArticleModel.find()
 }
 
-function post(content){
-  let newMessage = new MessageModel({content: content})
-  return newMessage.save()
+function post(article){
+  let newArticle = new ArticleModel(article)
+  console.log(newArticle);
+  return newArticle.save()
+}
+
+function search(topic){
+  console.log(topic);
+  return ArticleModel.find({topic: topic})
 }
 
 function deleteMessage(id){
-  return MessageModel.deleteOne({_id: id})
+  return ArticleModel.deleteOne({_id: id})
+}
+
+function getSearch(topic){
+  return ArticleModel.find({topic: topic})
 }
 
 function getSingleMessage(id){
-  return MessageModel.findOne({_id: id})
+  return ArticleModel.findOne({_id: id})
 }
 
 function updateMessage(id, update){
-  return MessageModel.findOneAndUpdate({_id: id}, {content: update}, {new: true})
+  return ArticleModel.findOneAndUpdate({_id: id}, {content: update}, {new: true})
 }
 
 module.exports = {
   getAll,
   getSingleMessage,
   post,
+  search,
   deleteMessage,
-  updateMessage
+  updateMessage,
+  getSearch
 }
