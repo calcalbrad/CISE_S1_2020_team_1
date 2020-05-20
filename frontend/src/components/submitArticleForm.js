@@ -25,17 +25,23 @@ class SubmitArticleForm extends React.Component {
 
   processSubmit(e){
     if (this.state.title.length > 500) {
-      alert("Error! The length of the title exceeds the maximum value (500 characters).");
-      e.preventDefault();
+      alert("Error! The length of the title exceeds the maximum value (500 characters).")
+      e.preventDefault()
       return false;
     } else if (this.state.author.length > 500) {
-      alert("Error! The length of the author exceeds the maximum value (500 characters).");
-      e.preventDefault();
+      alert("Error! The length of the author exceeds the maximum value (500 characters).")
+      e.preventDefault()
       return false;
     } else {
       e.preventDefault()
       this.props.submitMessage(this.state)
-      this.onChange();
+      this.onChange()
+      this.setState({title: ''})
+      this.setState({author: ''})
+      this.setState({pageRange: ''})
+      this.setState({topic: ''})
+      this.setState({DOI: ''})
+      this.setState({year: 2020});
     }
   }
 
