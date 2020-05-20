@@ -17,14 +17,14 @@ router.post('/submit', async (req, res) => {
   console.log(req.body.article.year)
 })
 
-router.delete('/delete/:id', async (req, res) => {
-  await messageApp.deleteMessage(req.params.id)
-  .then((messages) => res.json(messages))
+router.get('/search/:topic', async (req, res) => {
+  await messageApp.search(req.params.topic)
+  .then((articles) => res.json(articles))
   .catch((err) => res.status(404).json(err))
 })
 
-router.get('/message/:id', async (req, res) => {
-  await messageApp.getSingleMessage(req.params.id)
+router.delete('/delete/:id', async (req, res) => {
+  await messageApp.deleteMessage(req.params.id)
   .then((messages) => res.json(messages))
   .catch((err) => res.status(404).json(err))
 })

@@ -41,6 +41,18 @@ class MessageApp extends Component {
     })
   }
 
+  searchMessage = (keyword) => {
+    axios.get(`${PORT}/search/${keyword}`, {
+      keyword: keyword
+    })
+    .then((result)=>{
+      this.setMessages(result.data)
+    })
+    .catch((err)=>{
+      this.setError(err)
+    })
+  }
+
   submitMessage = (data) => {
     axios.post(`${PORT}/submit`, {
       content: data
@@ -99,7 +111,7 @@ class MessageApp extends Component {
       />
       <MessageForm
       ref='messageFormRef'
-      submitMessage={this.submitMessage}
+      searchMessage={this.searchMessage}
       />
       <MessageList
       messages={this.state.messages}

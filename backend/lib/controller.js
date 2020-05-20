@@ -11,6 +11,11 @@ function post(article){
   return newArticle.save()
 }
 
+function search(topic){
+  console.log(topic);
+  return ArticleModel.find({topic: topic})
+}
+
 function deleteMessage(id){
   return ArticleModel.deleteOne({_id: id})
 }
@@ -27,6 +32,7 @@ module.exports = {
   getAll,
   getSingleMessage,
   post,
+  search,
   deleteMessage,
   updateMessage
 }
