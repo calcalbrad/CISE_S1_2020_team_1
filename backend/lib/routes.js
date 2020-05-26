@@ -3,7 +3,7 @@ import ArticleModel from "./model.js"
 const messageApp = require('./controller.js')
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/getarticles', async (req, res) => {
   await messageApp.getAll()
   .then((messages) => res.json(messages))
   .catch((err) => res.status(404).json(err))

@@ -43,10 +43,12 @@ class MessageList extends Component {
       
     }
     render(){
-      if (!this.props.messages){
+      if (!this.props.messages || this.props.messages == undefined){
         return <ul id='message_list'>no messages</ul>
       }
       if (this.props.messages){
+        console.log(this.props.messages)
+        var messageArray = Array.from(this.props.messages)
         return <div>
         <ul id='message_list'>
         {this.props.messages.map(message=>{
