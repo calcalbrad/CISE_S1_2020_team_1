@@ -54,6 +54,7 @@ class MessageApp extends Component {
   getAllMessages=()=>{
     axios.get(`${PORT}/getarticles`)
     .then((result)=>{
+      console.log("hi" + result.data)
       this.setArticles(result.data)
     })
     .catch((err)=>{

@@ -19,10 +19,10 @@ const app = express()
 
 // if (process.env.NODE_ENV === 'production') {
     /*Adds the react production build to serve react requests*/
-    app.use(express.static(path.join(__dirname, "../frontend/build")));
+    app.use(express.static(path.resolve(__dirname, '../frontend/build')));
     /*React root*/
     app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname + "../frontend/build/index.html"));
+        res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
     });
 // }
 
