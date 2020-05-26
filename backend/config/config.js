@@ -1,8 +1,8 @@
 var config = {
- port: 3001,
+ port: process.env.PORT || 3001,
  db: "mongodb+srv://dbUser:dbUserPassword@cluster0-usdwk.mongodb.net/SEER?retryWrites=true&w=majority"
-
 }
+
 module.exports = config;
 
 

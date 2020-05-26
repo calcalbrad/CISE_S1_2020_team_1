@@ -1,0 +1,12 @@
+{
+    "name": "seer",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "cd backend && npm install && npm start",
+        "heroku-postbuild": "cd .. && cd frontend && npm install && npm start"
+    }
+  }
+  
