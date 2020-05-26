@@ -17,14 +17,14 @@ db.on('error', err => {
 
 const app = express()
 
-// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     /*Adds the react production build to serve react requests*/
     app.use(express.static(path.resolve(__dirname, '../frontend/build')));
     /*React root*/
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
     });
-// }
+}
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));
