@@ -12,8 +12,6 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const PORT = 'http://localhost:3001';
-
 class MessageApp extends Component {
   constructor(){
     super()
@@ -52,7 +50,7 @@ class MessageApp extends Component {
   }
 
   getAllMessages=()=>{
-    axios.get(`${PORT}/getarticles`)
+    axios.get(`/getarticles`)
     .then((result)=>{
       console.log("hi" + result.data)
       this.setArticles(result.data)
@@ -63,7 +61,7 @@ class MessageApp extends Component {
   }
 
   searchMessage = (keyword) => {
-    axios.get(`${PORT}/search/${keyword}`, {
+    axios.get(`/search/${keyword}`, {
       keyword: keyword
     })
     .then((result)=>{
@@ -75,7 +73,7 @@ class MessageApp extends Component {
   }
 
   submitMessage = (data) => {
-    axios.post(`${PORT}/submit`, {
+    axios.post(`/submit`, {
       content: data
     })
     .then(()=>{
@@ -87,7 +85,7 @@ class MessageApp extends Component {
   }
 
   deleteMessage = (id) => {
-    axios.delete(`${PORT}/delete/${id}`, {
+    axios.delete(`/delete/${id}`, {
       id: id
     })
     .then((result)=>{
@@ -99,7 +97,7 @@ class MessageApp extends Component {
   }
 
   sendUpdate = (id, content) => {
-    axios.put(`${PORT}/update/${id}`, {
+    axios.put(`/update/${id}`, {
       content: content
     })
     .then((result)=>{
@@ -113,7 +111,7 @@ class MessageApp extends Component {
   /* added by luke */
   submitArticle = (data) => {
     console.log(data);
-    axios.post(`${PORT}/submit`, {
+    axios.post(`/submit`, {
       article: data
     })
     .then(()=>{
