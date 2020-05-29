@@ -32,6 +32,24 @@ class MessageApp extends Component {
     this.setArticles(sorted);
   }
 
+   /* added by Luke */
+  orderByTitleAlphabetical() {
+    const sorted = [...this.state.articles].filter(article => typeof article.title != 'undefined').sort((a, b) => (a.title > b.title) ? 1 : -1);
+    this.setArticles(sorted);
+  }
+
+   /* added by Luke */
+  orderBySourceAlphabetical() {
+    const sorted = [...this.state.articles].filter(article => typeof article.source != 'undefined').sort((a, b) => (a.source > b.source) ? 1 : -1);
+    this.setArticles(sorted);
+  }
+
+   /* added by Luke */
+  orderByAuthorAlphabetical() {
+    const sorted = [...this.state.articles].filter(article => typeof article.author != 'undefined').sort((a, b) => (a.author > b.author) ? 1 : -1);
+    this.setArticles(sorted);
+  }
+
 
   setError(error){
     this.setState({
@@ -149,6 +167,9 @@ class MessageApp extends Component {
         <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
           <Dropdown.Item onClick={() =>{this.orderByYearDesc();}}>Sort by Newest</Dropdown.Item>
           <Dropdown.Item onClick={() =>{this.orderByYearAsc();}}>Sort by Oldest</Dropdown.Item>
+          <Dropdown.Item onClick={() =>{this.orderByTitleAlphabetical();}}>Sort by title</Dropdown.Item>
+          <Dropdown.Item onClick={() =>{this.orderByAuthorAlphabetical();}}>Sort by author</Dropdown.Item>
+          <Dropdown.Item onClick={() =>{this.orderBySourceAlphabetical();}}>Sort by source</Dropdown.Item>
         </DropdownButton>
         </Col>
       </Row>
