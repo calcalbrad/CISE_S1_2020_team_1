@@ -25,19 +25,6 @@ class MessageList extends Component {
     })
   }
   formatMessage(message){
-/*       return <li
-      className='message'
-      key={message._id}>
-      <Card style={divStyle}>
-      <Card.Header>{message.title}</Card.Header>
-      <ListGroup variant="flush">
-        <ListGroup.Item>Author(s): {message.author}</ListGroup.Item>
-        <ListGroup.Item>Pages: {message.pageRange}</ListGroup.Item>
-        <ListGroup.Item>Topic: {message.topic}</ListGroup.Item>
-        <ListGroup.Item>Year: {message.year}</ListGroup.Item>
-      </ListGroup>
-      </Card> */
-
     return <tr className='message'
       key={message._id}>
       <td>{message.topic}</td>
@@ -67,11 +54,9 @@ class MessageList extends Component {
           </tr>
         </thead>
         <tbody>
-        {/* <ul id='message_list'> */}
         {this.props.messages.map(message=>{
           return this.formatMessage(message)
         })}
-        {/* </ul> */}
         </tbody>
         </Table>
         <button onClick={() =>{
