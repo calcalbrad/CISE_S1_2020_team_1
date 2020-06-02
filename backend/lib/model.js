@@ -5,7 +5,8 @@ let ArticleSchema = mongoose.Schema({
   pageRange: String,
   topic: String,
   DOI: String,
-  year: Number
+  year: Number,
+  source: String
 });
 
 // MessageSchema.post('validate', function(doc, next) {
