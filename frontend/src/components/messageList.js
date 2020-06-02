@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import Card  from 'react-bootstrap/Card';
-import ListGroup  from 'react-bootstrap/ListGroup';
-
+import Table  from 'react-bootstrap/Table';
 class MessageList extends Component {
   constructor(){
     super()
@@ -27,7 +25,7 @@ class MessageList extends Component {
     })
   }
   formatMessage(message){
-      return <li
+/*       return <li
       className='message'
       key={message._id}>
       <Card style={divStyle}>
@@ -38,27 +36,48 @@ class MessageList extends Component {
         <ListGroup.Item>Topic: {message.topic}</ListGroup.Item>
         <ListGroup.Item>Year: {message.year}</ListGroup.Item>
       </ListGroup>
-    </Card>
-      </li>
-      
+      </Card> */
+
+    return <tr className='message'
+      key={message._id}>
+      <td>{message.topic}</td>
+      <td>{message.title}</td>
+      <td>{message.author}</td>
+      <td>{message.pageRange}</td>
+      <td>{message.source}</td>
+    </tr>      
     }
     render(){
-      if (!this.props.messages || this.props.messages == undefined){
+      if (!this.props.messages || this.props.messages === undefined){
         return <ul id='message_list'>no messages</ul>
       }
       if (this.props.messages){
         console.log(this.props.messages)
         var messageArray = Array.from(this.props.messages)
         return <div>
-        <ul id='message_list'>
+        <Table style={divStyle} striped bordered hover>
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Page Range</th>
+            <th>Year</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+        {/* <ul id='message_list'> */}
         {this.props.messages.map(message=>{
           return this.formatMessage(message)
         })}
-        </ul>
+        {/* </ul> */}
+        </tbody>
+        </Table>
         <button onClick={() =>{
             this.props.clearSearch();
         }}>Clear Search</button>
-        </div> 
+        </div>
       }
     }
   };
