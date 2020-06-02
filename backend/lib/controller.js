@@ -5,15 +5,16 @@ function getAll(){
   return ArticleModel.find()
 }
 
+
 function post(article){
   let newArticle = new ArticleModel(article)
   console.log(newArticle);
   return newArticle.save()
 }
 
-function search(topic){
-  console.log(topic);
-  return ArticleModel.find({topic: topic})
+function search(searchData){
+  console.log(searchData);
+  return ArticleModel.find({topic: searchData.topic})
 }
 
 function deleteMessage(id){

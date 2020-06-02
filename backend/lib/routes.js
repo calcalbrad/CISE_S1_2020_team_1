@@ -17,8 +17,16 @@ router.post('/submit', async (req, res) => {
   console.log(req.body.article.year)
 })
 
-router.get('/search/:topic', async (req, res) => {
-  await messageApp.search(req.params.topic)
+// router.get('/search/:topic', async (req, res) => {
+//   await messageApp.search(req.params.topic)
+//   .then((articles) => res.json(articles))
+//   .catch((err) => res.status(404).json(err))
+// })
+
+
+// search
+router.post('/search', async (req, res) => {
+  await messageApp.search(req.body.searchData)
   .then((articles) => res.json(articles))
   .catch((err) => res.status(404).json(err))
 })
