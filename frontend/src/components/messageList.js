@@ -31,6 +31,7 @@ class MessageList extends Component {
       <td>{message.title}</td>
       <td>{message.author}</td>
       <td>{message.pageRange}</td>
+      <td>{message.year}</td>
       <td>{message.source}</td>
     </tr>      
     }
@@ -39,8 +40,7 @@ class MessageList extends Component {
         return <ul id='message_list'>no messages</ul>
       }
       if (this.props.messages){
-        console.log(this.props.messages)
-        var messageArray = Array.from(this.props.messages)
+        console.log(this.props.messages);
         return <div>
         <Table style={divStyle} striped bordered hover>
         <thead>
