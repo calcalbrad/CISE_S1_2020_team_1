@@ -42,8 +42,7 @@ class SearchForm extends React.Component {
           onChange={(e) => this.onChange(e)}
           value={this.state.title}
           name='title'
-          id='title'
-          required>
+          id='title'>
         </input>
         <br />
         <label htmlFor="author">Search by article author:</label>
@@ -52,7 +51,7 @@ class SearchForm extends React.Component {
           value={this.state.author}
           name='author'
           id='author'
-          required>
+          >
         </input>
         <br />
         <label htmlFor="topic">Search by SE topic:</label>
