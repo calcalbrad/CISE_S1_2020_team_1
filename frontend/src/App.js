@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MessageList from './components/messageList.js'
-import MessageForm from './components/messageForm.js'
+import SearchForm from './components/searchForm.js'
 import ErrorHandler from './components/errorHandler.js'
 import SubmitArticleForm from './components/submitArticleForm'
 import axios from 'axios';
@@ -16,7 +16,8 @@ class MessageApp extends Component {
   constructor() {
     super()
     this.state = {
-      articles: []
+      articles: [],
+      topics: []
     }
   }
 
@@ -76,14 +77,21 @@ class MessageApp extends Component {
     })
   }
 
+  setTopics(topics) {
+    this.setState({
+      topics: topics
+    })
+  }
+
+
   componentDidMount() {
+    this.getTopics()
     this.getAllMessages()
   }
 
   getAllMessages = () => {
     axios.get(`/getarticles`)
       .then((result) => {
-        console.log("hi" + result.data)
         this.setArticles(result.data)
       })
       .catch((err) => {
@@ -91,24 +99,40 @@ class MessageApp extends Component {
       })
   }
 
-  searchMessage = (keyword) => {
-    axios.get(`/search/${keyword}`, {
-      keyword: keyword
+  // get topics
+  getTopics = () => {
+    axios.get(`/gettopics`)
+      .then((result) => {
+        this.setState({
+          topics: result.data
+        })
+      })
+      .catch((err) => {
+        this.setError(err)
+      })
+  }
+
+
+    /* added by luke */
+    submitArticle = (data) => {
+      axios.post(`/submit`, {
+        article: data
+      })
+        .then(() => {
+          this.getAllMessages()
+        })
+        .catch((err) => {
+          this.setError(err)
+        })
+    }
+
+  // search function
+  submitSearch = (searchData) => {
+    axios.post(`/search`, {
+      searchData: searchData
     })
       .then((result) => {
         this.setArticles(result.data)
-      })
-      .catch((err) => {
-        this.setError(err)
-      })
-  }
-
-  submitMessage = (data) => {
-    axios.post(`/submit`, {
-      content: data
-    })
-      .then(() => {
-        this.getAllMessages()
       })
       .catch((err) => {
         this.setError(err)
@@ -139,30 +163,21 @@ class MessageApp extends Component {
       })
   }
 
-  /* added by luke */
-  submitArticle = (data) => {
-    console.log(data);
-    axios.post(`/submit`, {
-      article: data
-    })
-      .then(() => {
-        this.getAllMessages()
-      })
-      .catch((err) => {
-        this.setError(err)
-      })
-  }
+
 
   render() {
     return (
       <React.Fragment>
         <Navbar className="justify-content-between" bg="dark" variant="dark">
           <Navbar.Brand>SEER Search</Navbar.Brand>
-          <MessageForm
-            ref='messageFormRef'
-            searchMessage={this.searchMessage}
-          />
+
         </Navbar>
+
+        <SearchForm
+        topics={this.state.topics}
+          ref='messageFormRef'
+          submitSearch={this.submitSearch}
+        />
         <ErrorHandler
           error={this.state.error}
         />
