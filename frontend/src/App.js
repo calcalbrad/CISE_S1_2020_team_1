@@ -144,6 +144,9 @@ class MessageApp extends Component {
           sendUpdate={this.sendUpdate}
           clearSearch={this.getAllMessages}
           />
+          <SubmitArticleForm
+          submitMessage={this.submitArticle}
+          />
         </Col>
         <Col sm={2}>
         <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
@@ -153,9 +156,6 @@ class MessageApp extends Component {
         </Col>
       </Row>
       </Container>
-      <SubmitArticleForm 
-        submitMessage={this.submitArticle}
-      />
       </React.Fragment>
     );
   }

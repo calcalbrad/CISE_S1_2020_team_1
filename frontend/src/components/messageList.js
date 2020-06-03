@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Table  from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+
 class MessageList extends Component {
   constructor(){
     super()
@@ -31,6 +33,7 @@ class MessageList extends Component {
       <td>{message.title}</td>
       <td>{message.author}</td>
       <td>{message.pageRange}</td>
+      <td>{message.year}</td>
       <td>{message.source}</td>
     </tr>      
     }
@@ -40,7 +43,6 @@ class MessageList extends Component {
       }
       if (this.props.messages){
         console.log(this.props.messages)
-        var messageArray = Array.from(this.props.messages)
         return <div>
         <Table style={divStyle} striped bordered hover>
         <thead>
@@ -59,9 +61,7 @@ class MessageList extends Component {
         })}
         </tbody>
         </Table>
-        <button onClick={() =>{
-            this.props.clearSearch();
-        }}>Clear Search</button>
+        <Button variant="secondary" onClick={() =>{this.props.clearSearch();}}>Clear Search</Button>{' '}
         </div>
       }
     }
