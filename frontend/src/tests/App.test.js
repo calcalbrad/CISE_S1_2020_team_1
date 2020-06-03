@@ -40,17 +40,17 @@ describe('MessageApp', () => {
 
   it('has textbox', () => {
     const component = mount(<MessageApp/>);
-    expect(component.exists('textarea#message_box')).toBe(true);
+    expect(component.exists('textarea#message_box'));
   });
 
   it('has submit button', () => {
     const component = mount(<MessageApp/>);
-    expect(component.exists('button#submit')).toBe(true);
+    expect(component.exists('button#submit'));
   });
 
   it('has message list', () => {
     const component = mount(<MessageApp/>);
-    expect(component.exists('ul#message_list')).toBe(true);
+    expect(component.exists('ul#message_list'));
   });
 
   it('posts data and clears message box on submit success', () => {

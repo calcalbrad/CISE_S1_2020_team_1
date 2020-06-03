@@ -38,7 +38,7 @@ class SubmitArticleForm extends React.Component {
       return false;
     } else {
       e.preventDefault()
-      this.props.submitMessage(this.state)
+      this.props.submitArticle(this.state)
       this.onChange()
       this.setState({title: ''})
       this.setState({author: ''})
