@@ -172,26 +172,24 @@ class MessageApp extends Component {
           <Navbar.Brand>SEER Search</Navbar.Brand>
 
         </Navbar>
-
-        <SearchForm
-        topics={this.state.topics}
-          ref='messageFormRef'
-          submitSearch={this.submitSearch}
-        />
         <ErrorHandler
           error={this.state.error}
         />
-        <Container>
+        <Container fluid>
           <Row>
-            <Col sm={10}>
+            <Col sm={8}>
               <MessageList
                 messages={this.state.articles}
                 handleDelete={this.deleteMessage}
                 sendUpdate={this.sendUpdate}
                 clearSearch={this.getAllMessages}
               />
+              <SubmitArticleForm
+              submitMessage={this.submitArticle}
+              />
             </Col>
-            <Col sm={2}>
+            <Col sm={4}>
+              <div style = {divInline}>
               <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
                 <Dropdown.Item onClick={() => { this.orderByYearDesc(); }}>Sort by Newest</Dropdown.Item>
                 <Dropdown.Item onClick={() => { this.orderByYearAsc(); }}>Sort by Oldest</Dropdown.Item>
@@ -202,12 +200,15 @@ class MessageApp extends Component {
                 <Dropdown.Item onClick={() => { this.orderBySourceAlphabetical(); }}>Sort by source</Dropdown.Item>
                 <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by source reverse</Dropdown.Item>
               </DropdownButton>
+              </div>
+              <SearchForm
+                topics={this.state.topics}
+                ref='messageFormRef'
+                submitSearch={this.submitSearch}
+              />
             </Col>
           </Row>
         </Container>
-        <SubmitArticleForm
-          submitMessage={this.submitArticle}
-        />
       </React.Fragment>
     );
   }
@@ -216,6 +217,8 @@ class MessageApp extends Component {
 const divStyle = {
   marginTop: '20px',
 };
-
+const divInline = {
+  display:"inline-block",
+}
 
 export default MessageApp;

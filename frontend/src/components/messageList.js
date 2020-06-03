@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Table  from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+
 class MessageList extends Component {
   constructor(){
     super()
@@ -42,13 +44,13 @@ class MessageList extends Component {
       if (this.props.messages){
         console.log(this.props.messages);
         return <div>
-        <Table style={divStyle} striped bordered hover>
+        <Table style = {divStyle} striped bordered hover responsive>
         <thead>
           <tr>
             <th>Topic</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Page Range</th>
+            <th>Page(s)</th>
             <th>Year</th>
             <th>Source</th>
           </tr>
@@ -59,9 +61,7 @@ class MessageList extends Component {
         })}
         </tbody>
         </Table>
-        <button onClick={() =>{
-            this.props.clearSearch();
-        }}>Clear Search</button>
+        <Button variant="secondary" onClick={() =>{this.props.clearSearch();}}>Clear Search</Button>{' '}
         </div>
       }
     }
