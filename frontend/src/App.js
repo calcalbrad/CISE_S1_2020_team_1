@@ -168,8 +168,15 @@ class MessageApp extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar className="justify-content-between" bg="dark" variant="dark">
-          <Navbar.Brand>SEER Search</Navbar.Brand>
+        <Navbar className="justify-content-between" bg="light">
+          <Navbar.Brand>
+            <img
+            src="/seer-logo.png"
+            height="50"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+            />
+      </Navbar.Brand>
 
         </Navbar>
         <ErrorHandler
