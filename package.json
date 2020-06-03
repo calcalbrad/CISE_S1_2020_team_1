@@ -4,8 +4,11 @@
     "private": true,
     "dependencies": {},
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "cd frontend && npm test",
         "start": "cd backend && npm install && npm start",
         "heroku-postbuild": "cd frontend && npm install && npm run build"
+    },
+    "devDependencies": {
+        "@testing-library/react": "^10.0.6"
     }
 }
