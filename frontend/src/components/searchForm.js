@@ -10,6 +10,16 @@ class SearchForm extends React.Component {
     }
   }
 
+  createSelectItems() {
+   var topics = this.props.topics;
+
+    let items = [];         
+    for (let i = 0; i < topics.length; i++) {             
+         items.push(<option key={i} value={topics[i]}>{topics[i]}</option>);   
+    }
+    return items;
+}  
+
   onChange = (e) => {
     if (e) {
       // to parse as int:
@@ -21,17 +31,10 @@ class SearchForm extends React.Component {
   processSubmit(e) {
       e.preventDefault()
       this.props.submitSearch(this.state)
-
-      // this.onChange()
-      // this.setState({ title: '' })
-      // this.setState({ author: '' })
-      // this.setState({ topic: '' })
-      // this.setState({ topic: '' })
-      // this.setState({ DOI: '' })
-      // this.setState({ year: 2020 });
   }
 
   render() {
+    if (this.props.topics){
     return (
       <form
         ref='formRef'
@@ -55,12 +58,15 @@ class SearchForm extends React.Component {
         </input>
         <br />
         <label htmlFor="topic">Search by SE topic:</label>
-        <input type="text"
-          onChange={(e) => this.onChange(e)}
-          value={this.state.topic}
+        <select
+           onChange={(e) => this.onChange(e)}
+          // value={this.state.topic}
           name='topic'
           id='topic'>
-        </input>
+          >
+          <option value=""> All topics </option>
+          {this.createSelectItems()}
+        </select>
         <br />
         <label htmlFor="source">Search by article source:</label>
         <input type="text"
@@ -78,7 +84,10 @@ class SearchForm extends React.Component {
           </button>
       </form>
     );
+  } else {
+    return <ul id='searchform'>no topics</ul>
   }
+}
 }
 
 export default SearchForm;

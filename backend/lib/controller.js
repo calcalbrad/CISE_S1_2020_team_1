@@ -12,15 +12,12 @@ function post(article) {
   return newArticle.save()
 }
 
+
+// search function
 function search(searchData) {
-  console.log(searchData);
-
- // ArticleModel.createIndexes({title: 'text'});
-
   return ArticleModel.find({topic: new RegExp(searchData.topic, 'i'), title: new RegExp(searchData.title, 'i'), author: new RegExp(searchData.author, 'i'), source: new RegExp(searchData.source, 'i')})
 }
 
-// $text: {$search: searchData.title}
 
 function deleteMessage(id) {
   return ArticleModel.deleteOne({ _id: id })
@@ -29,6 +26,12 @@ function deleteMessage(id) {
 function getSearch(topic) {
   return ArticleModel.find({ topic: topic })
 }
+
+
+function getTopics() {
+  return ArticleModel.distinct("topic");
+}
+
 
 function getSingleMessage(id) {
   return ArticleModel.findOne({ _id: id })
@@ -45,5 +48,6 @@ module.exports = {
   search,
   deleteMessage,
   updateMessage,
-  getSearch
+  getSearch,
+  getTopics
 }

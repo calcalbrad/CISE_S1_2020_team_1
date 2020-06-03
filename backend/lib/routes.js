@@ -9,6 +9,15 @@ router.get('/getarticles', async (req, res) => {
   .catch((err) => res.status(404).json(err))
 })
 
+
+router.get('/gettopics', async (req, res) => {
+  await messageApp.getTopics()
+  .then((topics) => res.json(topics))
+  .catch((err) => res.status(404).json(err))
+})
+
+
+
 /* submit article */
 router.post('/submit', async (req, res) => {
   await messageApp.post(req.body.article)
@@ -16,12 +25,6 @@ router.post('/submit', async (req, res) => {
   .catch((err) => console.log(err))
   console.log(req.body.article.year)
 })
-
-// router.get('/search/:topic', async (req, res) => {
-//   await messageApp.search(req.params.topic)
-//   .then((articles) => res.json(articles))
-//   .catch((err) => res.status(404).json(err))
-// })
 
 
 // search

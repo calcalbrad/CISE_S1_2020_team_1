@@ -16,7 +16,8 @@ class MessageApp extends Component {
   constructor() {
     super()
     this.state = {
-      articles: []
+      articles: [],
+      topics: []
     }
   }
 
@@ -76,14 +77,21 @@ class MessageApp extends Component {
     })
   }
 
+  setTopics(topics) {
+    this.setState({
+      topics: topics
+    })
+  }
+
+
   componentDidMount() {
+    this.getTopics()
     this.getAllMessages()
   }
 
   getAllMessages = () => {
     axios.get(`/getarticles`)
       .then((result) => {
-        console.log("hi" + result.data)
         this.setArticles(result.data)
       })
       .catch((err) => {
@@ -91,9 +99,22 @@ class MessageApp extends Component {
       })
   }
 
+  // get topics
+  getTopics = () => {
+    axios.get(`/gettopics`)
+      .then((result) => {
+        this.setState({
+          topics: result.data
+        })
+      })
+      .catch((err) => {
+        this.setError(err)
+      })
+  }
+
+
     /* added by luke */
     submitArticle = (data) => {
-      console.log(data);
       axios.post(`/submit`, {
         article: data
       })
@@ -107,7 +128,6 @@ class MessageApp extends Component {
 
   // search function
   submitSearch = (searchData) => {
-    console.log(searchData);
     axios.post(`/search`, {
       searchData: searchData
     })
@@ -154,6 +174,7 @@ class MessageApp extends Component {
         </Navbar>
 
         <SearchForm
+        topics={this.state.topics}
           ref='messageFormRef'
           submitSearch={this.submitSearch}
         />
