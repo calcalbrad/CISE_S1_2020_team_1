@@ -45,6 +45,7 @@ class SubmitArticleForm extends React.Component {
       this.setState({pageRange: ''})
       this.setState({topic: ''})
       this.setState({DOI: ''})
+      this.setState({source: ''})
       this.setState({year: 2020});
     }
   }

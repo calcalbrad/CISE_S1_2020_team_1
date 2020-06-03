@@ -192,7 +192,7 @@ class MessageApp extends Component {
                 clearSearch={this.getAllMessages}
               />
               <SubmitArticleForm
-              submitMessage={this.submitArticle}
+              submitArticle={this.submitArticle}
               />
             </Col>
             <Col sm={4}>
