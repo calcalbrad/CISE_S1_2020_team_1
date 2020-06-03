@@ -42,15 +42,15 @@ class MessageList extends Component {
         return <ul id='message_list'>no messages</ul>
       }
       if (this.props.messages){
-        console.log(this.props.messages)
+        console.log(this.props.messages);
         return <div>
-        <Table style={divStyle} striped bordered hover>
+        <Table style = {divStyle} striped bordered hover responsive>
         <thead>
           <tr>
             <th>Topic</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Page Range</th>
+            <th>Page(s)</th>
             <th>Year</th>
             <th>Source</th>
           </tr>
