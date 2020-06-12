@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MessageList from './components/messageList.js'
+import ArticleList from './components/ArticleList.js'
 import SearchForm from './components/searchForm.js'
 import ErrorHandler from './components/errorHandler.js'
 import SubmitArticleForm from './components/submitArticleForm'
@@ -12,7 +12,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class MessageApp extends Component {
+class SEERApp extends Component {
   constructor() {
     super()
     this.state = {
@@ -83,19 +83,18 @@ class MessageApp extends Component {
     })
   }
 
-
   componentDidMount() {
     this.getTopics()
-    this.getAllMessages()
+    this.getAllArticles()
   }
 
-  getAllMessages = () => {
+  getAllArticles = () => {
     axios.get(`/getarticles`)
-      .then((result) => {
-        this.setArticles(result.data)
+      .then((articles) => {
+        this.setArticles(articles.data)
       })
-      .catch((err) => {
-        this.setError(err)
+      .catch((error) => {
+        this.setError(error)
       })
   }
 
@@ -112,58 +111,32 @@ class MessageApp extends Component {
       })
   }
 
-
-    /* added by luke */
-    submitArticle = (data) => {
-      axios.post(`/submit`, {
-        article: data
-      })
-        .then(() => {
-          this.getAllMessages()
-        })
-        .catch((err) => {
-          this.setError(err)
-        })
-    }
-
-  // search function
-  submitSearch = (searchData) => {
-    axios.post(`/search`, {
-      searchData: searchData
+  // added by luke 
+  submitArticle = (data) => {
+    axios.post(`/submit`, {
+      article: data
     })
-      .then((result) => {
-        this.setArticles(result.data)
+      .then(() => {
+        this.getAllArticles()
+        this.getTopics()
       })
       .catch((err) => {
         this.setError(err)
       })
   }
 
-  deleteMessage = (id) => {
-    axios.delete(`/delete/${id}`, {
-      id: id
+  // search function
+  submitSearch = (searchData) => {
+    axios.post(`/search`, {
+      searchData: searchData
     })
-      .then((result) => {
-        this.getAllMessages()
+      .then((searchResult) => {
+        this.setArticles(searchResult.data)
       })
       .catch((err) => {
-        this.setError(err);
+        this.setError(err)
       })
   }
-
-  sendUpdate = (id, content) => {
-    axios.put(`/update/${id}`, {
-      content: content
-    })
-      .then((result) => {
-        this.getAllMessages()
-      })
-      .catch((err) => {
-        this.setError(err);
-      })
-  }
-
-
 
   render() {
     return (
@@ -171,12 +144,12 @@ class MessageApp extends Component {
         <Navbar className="justify-content-between" bg="light">
           <Navbar.Brand>
             <img
-            src="/seer-logo.png"
-            height="50"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
+              src="/seer-logo.png"
+              height="50"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
             />
-      </Navbar.Brand>
+          </Navbar.Brand>
 
         </Navbar>
         <ErrorHandler
@@ -185,28 +158,28 @@ class MessageApp extends Component {
         <Container fluid>
           <Row>
             <Col sm={8}>
-              <MessageList
+              <ArticleList
                 messages={this.state.articles}
                 handleDelete={this.deleteMessage}
                 sendUpdate={this.sendUpdate}
-                clearSearch={this.getAllMessages}
+                clearSearch={this.getAllArticles}
               />
               <SubmitArticleForm
-              submitArticle={this.submitArticle}
+                submitArticle={this.submitArticle}
               />
             </Col>
             <Col sm={4}>
-              <div style = {divInline}>
-              <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
-                <Dropdown.Item onClick={() => { this.orderByYearDesc(); }}>Sort by Newest</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByYearAsc(); }}>Sort by Oldest</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByTitleAlphabetical(); }}>Sort by title</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByTitleAlphabeticalReverse(); }}>Sort by title reverse</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabetical(); }}>Sort by author</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabeticalReverse(); }}>Sort by author reverse</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderBySourceAlphabetical(); }}>Sort by source</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by source reverse</Dropdown.Item>
-              </DropdownButton>
+              <div style={divInline}>
+                <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
+                  <Dropdown.Item onClick={() => { this.orderByYearDesc(); }}>Sort by Newest</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderByYearAsc(); }}>Sort by Oldest</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderByTitleAlphabetical(); }}>Sort by Title A-Z</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderByTitleAlphabeticalReverse(); }}>Sort by Title Z-A</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderByAuthorAlphabetical(); }}>Sort by Author A-Z</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderByAuthorAlphabeticalReverse(); }}>Sort by Author Z-A</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderBySourceAlphabetical(); }}>Sort by Source A-Z</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by Source Z-A</Dropdown.Item>
+                </DropdownButton>
               </div>
               <SearchForm
                 topics={this.state.topics}
@@ -225,7 +198,7 @@ const divStyle = {
   marginTop: '20px',
 };
 const divInline = {
-  display:"inline-block",
+  display: "inline-block",
 }
 
-export default MessageApp;
+export default SEERApp;
