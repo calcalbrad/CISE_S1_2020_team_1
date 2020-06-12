@@ -27,35 +27,14 @@ function search(searchData) {
 
 }
 
-function deleteMessage(id) {
-  return ArticleModel.deleteOne({ _id: id })
-}
-
-function getSearch(topic) {
-  return ArticleModel.find({ topic: topic })
-}
-
-
 function getTopics() {
   return ArticleModel.distinct("topic");
 }
 
 
-function getSingleMessage(id) {
-  return ArticleModel.findOne({ _id: id })
-}
-
-function updateMessage(id, update) {
-  return ArticleModel.findOneAndUpdate({ _id: id }, { content: update }, { new: true })
-}
-
 module.exports = {
   getAll,
-  getSingleMessage,
   post,
   search,
-  deleteMessage,
-  updateMessage,
-  getSearch,
   getTopics
 }

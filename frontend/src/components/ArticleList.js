@@ -2,30 +2,13 @@ import React, {Component} from 'react';
 import Table  from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-class MessageList extends Component {
+class ArticleList extends Component {
   constructor(){
     super()
     this.state = {
-      editMode: {
-        id: null,
-        content: null
-      }
     }
   }
 
-  sendUpdate(){
-    this.props.sendUpdate(this.state.editMode.id,this.refs.updateBox.value)
-    this.toggleUpdate({id:null,content:null})
-  }
-
-  toggleUpdate(message){
-    this.setState({
-      editMode: {
-        id: message._id,
-        content: message.title
-      }
-    })
-  }
   formatMessage(message){
     return <tr className='message'
       key={message._id}>
@@ -70,4 +53,4 @@ class MessageList extends Component {
     marginTop: '20px',
   };
 
-  export default MessageList
+  export default ArticleList
