@@ -7,4 +7,5 @@ script:
   - npm install -g react-scripts
   - npm install --save-dev @testing-library/jest-dom
   - npm install --save-dev @testing-library/user-event
+  - npm install --save-dev enzyme enzyme-adapter-react-16
   - npm test
