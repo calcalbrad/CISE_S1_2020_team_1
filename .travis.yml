@@ -4,4 +4,6 @@ node_js:
 script:
   - npm install
   - npm install -g react-scripts
+  - npm install --save-dev @testing-library/jest-dom
+  - npm install --save-dev @testing-library/user-event
   - npm test
