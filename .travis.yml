@@ -4,8 +4,9 @@ node_js:
 script:
   - npm install
   - npm install --save-dev react react-dom
-  - npm install -g react-scripts
   - npm install --save-dev @testing-library/jest-dom
   - npm install --save-dev @testing-library/user-event
   - npm install --save-dev enzyme enzyme-adapter-react-16
+  - npm install react-bootstrap bootstrap
+  - npm install -g react-scripts
   - npm test
