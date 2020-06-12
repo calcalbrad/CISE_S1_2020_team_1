@@ -1,5 +1,5 @@
 import React from 'react'
-import MessageList from '../components/MessageList'
+import ArticleList from '../components/ArticleList'
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { mount, shallow } from 'enzyme'

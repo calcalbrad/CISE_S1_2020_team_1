@@ -1,4 +1,8 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 class SubmitArticleForm extends React.Component {
   constructor(){
     super()
@@ -41,75 +45,55 @@ class SubmitArticleForm extends React.Component {
       this.setState({pageRange: ''})
       this.setState({topic: ''})
       this.setState({DOI: ''})
+      this.setState({source: ''})
       this.setState({year: 2020});
     }
   }
 
 render(){
     return (
-        <form
-          ref='formRef'
-          onSubmit={(e)=>this.processSubmit(e)}
-          >
-          <label htmlFor="title">Article title:</label> 
-          <textarea
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.title}
-           name='title'
-           id='title'
-           required>
-          </textarea>
-          <br/>
-          <label htmlFor="author">Article author:</label> 
-          <textarea
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.author}
-           name='author'
-           id='author'
-           required>
-          </textarea>
-          <br/>
-          <label htmlFor="pageRange">Page range:</label> 
-          <textarea
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.pageRange}
-           name='pageRange'
-           id='pageRange'>
-          </textarea>
-          <br/>
-          <label htmlFor="topic">Article topic:</label> 
-          <textarea
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.topic}
-           name='topic'
-           id='topic'>
-          </textarea>
-          <br/>
-          <label htmlFor="DOI">Article DOI:</label> 
-          <textarea
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.DOI}
-           name='DOI'
-           id='DOI'>
-          </textarea>
-          <br/>
-          <label htmlFor="year">Article year:</label> 
-          <input type = "number"
-           onChange={(e)=>this.onChange(e)}
-           value={this.state.year}
-           name='year'
-           id='year'>
-          </input>
-          <br/>
-          <button
-            type="submit"
-            name="Submit"
-            id="submit">
+      <Card style={divStyle}>
+        <Card.Header>Submit Article</Card.Header>
+        <Card.Body>
+        <Form ref='formRef' onSubmit={(e)=>this.processSubmit(e)}>
+          <Form.Group controllId="formTitle">
+            <Form.Control type="text" placeholder="Article Title" onChange={(e)=>this.onChange(e)}
+            value={this.state.title} name='title' id='title'required />
+          </Form.Group>
+          <Form.Group controllId="formAuthor">
+            <Form.Control type="text" placeholder="Article Author" onChange={(e)=>this.onChange(e)}
+             value={this.state.author} name='author' id='author'required />
+          </Form.Group>
+          <Form.Group controllId="formPageRange">
+            <Form.Control type="text" placeholder="Page Range" onChange={(e)=>this.onChange(e)}
+             value={this.state.pageRange} name='pageRange' id='pageRange'required />
+          </Form.Group>
+          <Form.Group controllId="formTopic">
+            <Form.Control type="text" placeholder="Article Topic" onChange={(e)=>this.onChange(e)}
+             value={this.state.topic} name='topic' id='topic'required />
+          </Form.Group>
+          <Form.Group controllId="formDOI">
+            <Form.Control type="text" placeholder="DOI" onChange={(e)=>this.onChange(e)}
+             value={this.state.DOI} name='DOI' id='DOI'required />
+          </Form.Group>
+          <Form.Group controllId="formSource">
+            <Form.Control type="text" placeholder="Source" onChange={(e)=>this.onChange(e)}
+             value={this.state.source} name='source' id='source'required />
+          </Form.Group>
+          <Form.Group controllId="formYear">
+            <Form.Control type="text" placeholder="Article Topic" onChange={(e)=>this.onChange(e)}
+             value={this.state.year} name='year' id='year'required />
+          </Form.Group>
+          <Button variant="primary" name="Submit" id="Submit" type="submit">
             Submit
-          </button>
-        </form>
+          </Button>
+        </Form>
+        </Card.Body>
+      </Card>
     );
   }
 }
-
+const divStyle = {
+  marginTop: '20px',
+};
 export default SubmitArticleForm;
