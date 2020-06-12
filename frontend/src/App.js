@@ -6,6 +6,9 @@ import SubmitArticleForm from './components/submitArticleForm'
 import axios from 'axios';
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -164,9 +167,6 @@ class SEERApp extends Component {
                 sendUpdate={this.sendUpdate}
                 clearSearch={this.getAllArticles}
               />
-              <SubmitArticleForm
-                submitArticle={this.submitArticle}
-              />
             </Col>
             <Col sm={4}>
               <div style={divInline}>
@@ -181,11 +181,26 @@ class SEERApp extends Component {
                   <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by Source Z-A</Dropdown.Item>
                 </DropdownButton>
               </div>
-              <SearchForm
-                topics={this.state.topics}
-                ref='messageFormRef'
-                submitSearch={this.submitSearch}
-              />
+              <Card style={divStyle}>
+                <Tabs style={{marginLeft: 0 + 'px'}} defaultActiveKey="search" id="card_tab">
+                  <Tab eventKey="search" title="Search">
+                  <Card.Body>
+                    <SearchForm 
+                    topics={this.state.topics}
+                    ref='messageFormRef'
+                    submitSearch={this.submitSearch}
+                    />
+                  </Card.Body>
+                  </Tab>
+                  <Tab eventKey="submit" title="Submit">
+                  <Card.Body>
+                    <SubmitArticleForm
+                    submitArticle={this.submitArticle}
+                    />
+                    </Card.Body>
+                  </Tab>
+              </Tabs>
+              </Card>
             </Col>
           </Row>
         </Container>
