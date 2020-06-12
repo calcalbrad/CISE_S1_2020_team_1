@@ -200,12 +200,12 @@ class MessageApp extends Component {
               <DropdownButton style={divStyle} id="dropdown-basic-button" title="Sort">
                 <Dropdown.Item onClick={() => { this.orderByYearDesc(); }}>Sort by Newest</Dropdown.Item>
                 <Dropdown.Item onClick={() => { this.orderByYearAsc(); }}>Sort by Oldest</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByTitleAlphabetical(); }}>Sort by title</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByTitleAlphabeticalReverse(); }}>Sort by title reverse</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabetical(); }}>Sort by author</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabeticalReverse(); }}>Sort by author reverse</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderBySourceAlphabetical(); }}>Sort by source</Dropdown.Item>
-                <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by source reverse</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderByTitleAlphabetical(); }}>Sort by Title A-Z</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderByTitleAlphabeticalReverse(); }}>Sort by Title Z-A</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabetical(); }}>Sort by Author A-Z</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderByAuthorAlphabeticalReverse(); }}>Sort by Author Z-A</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderBySourceAlphabetical(); }}>Sort by Source A-Z</Dropdown.Item>
+                <Dropdown.Item onClick={() => { this.orderBySourceAlphabeticalReverse(); }}>Sort by Source Z-A</Dropdown.Item>
               </DropdownButton>
               </div>
               <SearchForm

@@ -23,7 +23,6 @@ router.post('/submit', async (req, res) => {
   await messageApp.post(req.body.article)
   .then((articles) => res.json(articles))
   .catch((err) => console.log(err))
-  console.log(req.body.article.year)
 })
 
 
