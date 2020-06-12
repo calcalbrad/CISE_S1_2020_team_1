@@ -3,7 +3,7 @@ node_js:
   - "stable"
 script:
   - npm install
-  - npm install --save-dev react
+  - npm install --save-dev react react-dom
   - npm install -g react-scripts
   - npm install --save-dev @testing-library/jest-dom
   - npm install --save-dev @testing-library/user-event
