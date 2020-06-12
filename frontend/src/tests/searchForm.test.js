@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MessageForm from '../components/MessageForm'
+import SearchForm from '../components/searchForm'
 import Enzyme, { render, ReactWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { mount, shallow } from 'enzyme'
