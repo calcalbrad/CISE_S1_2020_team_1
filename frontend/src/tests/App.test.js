@@ -47,31 +47,43 @@ describe('SEER App', () => {
   })
 
   it('renders without crashing', () => {
+    spyOn(console, 'error');
+
     const component = mount(<SEERApp/>);
     expect(component).toMatchSnapshot();
   });
 
   it('has textbox', () => {
+    spyOn(console, 'error');
+
     const component = mount(<SEERApp/>);
     expect(component.exists('textarea#message_box'));
   });
 
   it('has submit button', () => {
+    spyOn(console, 'error');
+
     const component = mount(<SEERApp/>);
     expect(component.exists('button#submit'));
   });
 
   it('has message list', () => {
+    spyOn(console, 'error');
+
     const component = mount(<SEERApp/>);
     expect(component.exists('ul#article_list'));
   });
 
   it('Loads data from api', () => {
+    spyOn(console, 'error');
+
     mount(<SEERApp />);
     expect(mockAxios.get).toHaveBeenCalled();
   });
 
   it('should contain a list of articles', () => {
+    spyOn(console, 'error');
+
     const component = shallow(<SEERApp/>);
     act(() => {
       render(component, container);
@@ -81,6 +93,8 @@ describe('SEER App', () => {
   });
 
   it('should contain a sorting function', () => {
+    spyOn(console, 'error');
+    
     const component = shallow(<SEERApp/>);
     act(() => {
       render(component, container);
