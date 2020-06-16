@@ -1,16 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MessageApp from '../App'
+import SEERApp from '../App'
+import axios from 'axios';
 import mockAxios from '../__mocks__/axios.js'
-import errorMock from '../__mocks__/error.json'
 import mockMessages from '../__mocks__/messages.json'
-import Enzyme from 'enzyme';
+import Enzyme, { render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+import { act } from 'react-dom/test-utils';
 
 Enzyme.configure({ adapter: new Adapter()})
 
-describe('MessageApp', () => {
+let container = null;
+beforeEach(() => {
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  ReactDOM.unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+})
+
+describe('SEER App', () => {
 
   beforeEach(function(){
     mockAxios.post.mockImplementation(() =>
@@ -34,113 +47,45 @@ describe('MessageApp', () => {
   })
 
   it('renders without crashing', () => {
-    const component = mount(<MessageApp/>);
+    const component = mount(<SEERApp/>);
     expect(component).toMatchSnapshot();
   });
 
   it('has textbox', () => {
-    const component = mount(<MessageApp/>);
+    const component = mount(<SEERApp/>);
     expect(component.exists('textarea#message_box'));
   });
 
   it('has submit button', () => {
-    const component = mount(<MessageApp/>);
+    const component = mount(<SEERApp/>);
     expect(component.exists('button#submit'));
   });
 
   it('has message list', () => {
-    const component = mount(<MessageApp/>);
-    expect(component.exists('ul#message_list'));
-  });
-
-  it('posts data and clears message box on submit success', () => {
-    const component = mount(<MessageApp/>);
-    component.find('textarea#message_box').simulate('change', { target: { value: 'Hello' } })
-    component.find('form').simulate('submit')
-    expect(mockAxios.post).toHaveBeenCalledWith("http://localhost:3001/message", {"content": "Hello"});
-    expect(component.instance().refs.messageFormRef.state.currentMessage).toEqual('');
+    const component = mount(<SEERApp/>);
+    expect(component.exists('ul#article_list'));
   });
 
   it('Loads data from api', () => {
-    mount(<MessageApp />);
-    expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    mount(<SEERApp />);
+    expect(mockAxios.get).toHaveBeenCalled();
   });
 
-  it('removes message on delete', async () => {
-    const component = await mount(<MessageApp/>);
-    await component.update()
-    await component.find('ul#message_list').childAt(0).find('#delete').simulate('click');
-    await component.update()
-    expect(mockAxios.delete).toHaveBeenCalledWith("http://localhost:3001/delete/1", {"id": 1})
+  it('should contain a list of articles', () => {
+    const component = shallow(<SEERApp/>);
+    act(() => {
+      render(component, container);
+    });
+
+    expect(component.find('ArticleList')).toBeTruthy();
   });
 
-  it('updates message on update', async () => {
-    const component = await mount(<MessageApp/>);
-    await component.update()
-    await component.find('ul#message_list').childAt(0).find('#update').simulate('click')
-    expect(component.find('ul#message_list').childAt(0).find('#send').text()).toBe('Send Update')
-    component.find('ul#message_list').childAt(0).find('#send').simulate('click')
-    expect(mockAxios.put).toHaveBeenCalledWith("http://localhost:3001/update/1", {"content": "Hello"});
-    expect(component.find('textarea').text()).toEqual('');
-  });
+  it('should contain a sorting function', () => {
+    const component = shallow(<SEERApp/>);
+    act(() => {
+      render(component, container);
+    });
 
-})
-
-describe('MessageApp erroring', () => {
-  beforeEach(function(){
-    mockAxios.get.mockImplementationOnce(() =>
-    Promise.reject(errorMock));
-    mockAxios.post.mockImplementationOnce(() =>
-    Promise.reject(errorMock));
-    mockAxios.delete.mockImplementationOnce(() =>
-    Promise.reject(errorMock));
-    mockAxios.put.mockImplementationOnce(() =>
-    Promise.reject(errorMock));
-  });
-  afterEach(function(){
-    mockAxios.get.mockClear()
-    mockAxios.post.mockClear()
-    mockAxios.delete.mockClear()
-    mockAxios.put.mockClear()
-  })
-  it('loads err on GET err', async () => {
-    var component = await mount(<MessageApp/>);
-    await component.update()
-    expect(component.state().error).toEqual({"response": {"data": "error text from json mock"}});
-    expect(component.find('#error').text()).toBe('Error: error text from json mock');
-  });
-  it('loads err on Post err', async () => {
-    const component = mount(<MessageApp/>);
-    component.find('textarea#message_box').simulate('change', { target: { value: 'bad string' } })
-    await component.find('form').simulate('submit')
-    await component.update()
-    expect(mockAxios.post).toHaveBeenCalledTimes(1)
-    expect(component.state().error).toEqual({"response": {"data": "error text from json mock"}});
-    expect(component.find('#error').text()).toBe('Error: error text from json mock');
-  });
-  it('loads err on delete err', async () => {
-    const component = await mount(<MessageApp/>);
-    component.setState({
-      messages: mockMessages,
-      loaded: true
-    })
-    await component.update()
-    await component.find('ul#message_list').childAt(0).find('#delete').simulate('click');
-    await component.update()
-    expect(component.state().error).toEqual({"response": {"data": "error text from json mock"}});
-    expect(component.find('#error').text()).toBe('Error: error text from json mock');
-  });
-  it('loads err on update err', async () => {
-    const component = await mount(<MessageApp/>);
-    component.setState({
-      messages: mockMessages,
-      loaded: true
-    })
-    await component.update()
-    await component.find('ul#message_list').childAt(0).find('#update').simulate('click')
-    expect(component.find('ul#message_list').childAt(0).find('#send').text()).toBe('Send Update')
-    component.find('ul#message_list').childAt(0).find('#send').simulate('click')
-    expect(component.state().error).toEqual({"response": {"data": "error text from json mock"}});
-    expect(component.find('#error').text()).toBe('Error: error text from json mock');
+    expect(component.find('Dropdown Button')).toBeTruthy();
   });
 });
