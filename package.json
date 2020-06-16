@@ -1,0 +1,14 @@
+{
+    "name": "seer",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {},
+    "scripts": {
+        "test": "cd frontend && npm test",
+        "start": "cd backend && npm install && npm start",
+        "heroku-postbuild": "cd frontend && npm install && npm run build"
+    },
+    "devDependencies": {
+        "@testing-library/react": "^10.0.6"
+    }
+}
