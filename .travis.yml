@@ -10,5 +10,4 @@ script:
   - npm install --save-dev enzyme enzyme-adapter-react-16
   - npm install react-bootstrap bootstrap
   - npm install -g react-scripts
-  - jest --updateSnapshot
   - npm test
